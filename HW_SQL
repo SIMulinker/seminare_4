@@ -1,0 +1,32 @@
+--
+-- Использованная кодировка текста: UTF-8
+--
+PRAGMA foreign_keys = off;
+BEGIN TRANSACTION;
+
+-- Таблица: opinion_list
+CREATE TABLE IF NOT EXISTS opinion_list (id INTEGER PRIMARY KEY AUTOINCREMENT, level_view TEXT);
+INSERT INTO opinion_list (id, level_view) VALUES (1, 'Не знакомы');
+INSERT INTO opinion_list (id, level_view) VALUES (2, 'Виделись');
+INSERT INTO opinion_list (id, level_view) VALUES (3, 'Знакомы');
+INSERT INTO opinion_list (id, level_view) VALUES (4, 'Приятельские');
+INSERT INTO opinion_list (id, level_view) VALUES (5, 'Симпатия');
+INSERT INTO opinion_list (id, level_view) VALUES (6, 'Дружба');
+INSERT INTO opinion_list (id, level_view) VALUES (7, '---');
+INSERT INTO opinion_list (id, level_view) VALUES (8, '---');
+INSERT INTO opinion_list (id, level_view) VALUES (9, 'Неприязнь');
+INSERT INTO opinion_list (id, level_view) VALUES (10, 'Вражда');
+
+-- Таблица: relations
+CREATE TABLE IF NOT EXISTS relations ("key" INTEGER PRIMARY KEY ON CONFLICT ROLLBACK AUTOINCREMENT, first_person INTEGER NOT NULL, second_person INTEGER, fw_opinion TEXT NOT NULL, bck_opinion TEXT NOT NULL);
+
+-- Таблица: students
+CREATE TABLE IF NOT EXISTS students (id INTEGER PRIMARY KEY ON CONFLICT ABORT AUTOINCREMENT, first_name TEXT NOT NULL, second_name TEXT NOT NULL, address NOT NULL);
+INSERT INTO students (id, first_name, second_name, address) VALUES (1, 'Андрей', 'Трезвый', 'Большой.ул. Длинная д.32');
+INSERT INTO students (id, first_name, second_name, address) VALUES (2, 'Анюта', 'Смелая', 'пос. Маленький пр. Двух домов д.1');
+INSERT INTO students (id, first_name, second_name, address) VALUES (3, 'Игорь', 'Пельмень', 'г. Уральск ул.Тихая д.10 кв.5');
+INSERT INTO students (id, first_name, second_name, address) VALUES (4, 'Павел', 'Грустный', 'д. Далёкая пер. Зайцев д.1');
+INSERT INTO students (id, first_name, second_name, address) VALUES (5, 'Раиса', 'Грамотная', 'х. Умников бул. Капуцинов д.64');
+
+COMMIT TRANSACTION;
+PRAGMA foreign_keys = on;
